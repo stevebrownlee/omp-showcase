@@ -3,6 +3,6 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://stevebrownlee.github.io',
-  base: '/omp-showcase',
+  base: '/omp-showcase/',
   integrations: [tailwind()],
 });
