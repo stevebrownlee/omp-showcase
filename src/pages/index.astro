@@ -1,0 +1,482 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Features data mapped to their real-world developer benefits
+const pillars = [
+  {
+    title: "Subscription & Budget Freedom",
+    description: "Break free from single-provider lock-in and track your usage down to the penny.",
+    features: [
+      {
+        id: "universal-login",
+        num: "01",
+        title: "All Providers, One Login",
+        benefit: "Connect all your model subscriptions seamlessly",
+        desc: "Stop copying API keys or maintaining multiple accounts. Sign into Anthropic, OpenAI, Gemini, and more, and access all their leading models in one unified prompt.",
+        badge: "Auth",
+        command: "$ omp login --all"
+      },
+      {
+        id: "token-counter",
+        num: "02",
+        title: "Real-Time Token Usage",
+        benefit: "Know exactly how much context you're consuming",
+        desc: "Never guess when you're hitting context limits. omp displays your input and output token counts in real-time as your agent parses files and runs steps.",
+        badge: "Telemetry",
+        command: "Tokens: 14.2k in / 842 out"
+      },
+      {
+        id: "cost-tracking",
+        num: "03",
+        title: "Anthropic Cost Tracking",
+        benefit: "Prevent surprise bills with instant pricing info",
+        desc: "See the exact financial cost of each query when using Anthropic models. A real-time micro-cent ticker updates with every response so you stay within budget.",
+        badge: "Budget",
+        command: "Cost: $0.0421"
+      }
+    ]
+  },
+  {
+    title: "Dynamic Model Tiering",
+    description: "Switch models instantly based on task complexity, speed, and budget.",
+    features: [
+      {
+        id: "model-modes",
+        num: "04",
+        title: "Task-Based Model Modes",
+        benefit: "Match model power to task difficulty",
+        desc: "Configure different models for 'quick' commands, 'default' coding, 'planning' architectures, or 'slow' deep-reasoning sessions. Optimize both speed and cost.",
+        badge: "Routing",
+        command: "modes: quick=haiku default=sonnet planning=o1"
+      },
+      {
+        id: "switch-command",
+        num: "05",
+        title: "The `/switch` Command",
+        benefit: "Swap models instantly mid-session",
+        desc: "Stuck on a tricky bug? Instantly hot-swap the active model with `/switch` without losing your conversation history, workspace context, or active shell session.",
+        badge: "Command",
+        command: "/switch o1-mini"
+      },
+      {
+        id: "ctrl-p",
+        num: "06",
+        title: "Ctrl+P Model Speed-Dial",
+        benefit: "Keyboard shortcut for rapid model selection",
+        desc: "Instantly toggle between your preconfigured fast, default, and slow models with a simple keystroke. Stay in the zone without typing out commands.",
+        badge: "Shortcut",
+        command: "Press [Ctrl + P] to cycle models"
+      },
+      {
+        id: "shift-tab",
+        num: "07",
+        title: "Shift+Tab Thinking Toggle",
+        benefit: "Instantly adjust model reasoning depth",
+        desc: "Fine-tune the reasoning budget of reasoning models like o1 or o3-mini on the fly. Toggle thinking depth instantly to balance speed and accuracy.",
+        badge: "Shortcut",
+        command: "Press [Shift + Tab] to toggle reasoning"
+      }
+    ]
+  },
+  {
+    title: "Autopilot & Collaboration",
+    description: "Self-correcting code loops and multiplayer sessions that amplify productivity.",
+    features: [
+      {
+        id: "advisor-mode",
+        num: "08",
+        title: "Dual-Agent Advisor Mode",
+        benefit: "Two brains working in tandem",
+        desc: "Run two different models side-by-side. Have a fast model write the initial implementation while a slow, reasoning model acts as an active advisor, peer-reviewing code.",
+        badge: "Architecture",
+        command: "Advisor (o1): 'Check memory allocation at line 42'"
+      },
+      {
+        id: "goal-command",
+        num: "09",
+        title: "Autopilot Loop with `/goal`",
+        benefit: "Self-correcting tasks that guarantee success",
+        desc: "Give omp a final criteria and let it iterate autonomously. It runs compiler checks, executes tests, reads errors, and refines the code until your goal is 100% achieved.",
+        badge: "Autopilot",
+        command: "/goal build and pass all unit tests"
+      },
+      {
+        id: "collab-command",
+        num: "10",
+        title: "Multiplayer with `/collab`",
+        benefit: "Collaborate in real-time with teammates",
+        desc: "Invite teammates or pair multiple agents into the same project workspace. Synchronize context, share command histories, and build complex software as a team.",
+        badge: "Multiplayer",
+        command: "/collab invite alice@dev.corp"
+      }
+    ]
+  },
+  {
+    title: "Immersive Human-Agent UI",
+    description: "Human-centric interfaces that keep you in control of your coding companion.",
+    features: [
+      {
+        id: "planning-docs",
+        num: "11",
+        title: "Planning Document Interface",
+        benefit: "Align on specs before writing code",
+        desc: "omp dynamically creates and syncs design docs in real-time. Discuss changes, outline tasks, and refine details in clean markdown before any code is generated.",
+        badge: "UI",
+        command: "local://PLAN.md synced and loaded"
+      },
+      {
+        id: "tts-kokoro",
+        num: "12",
+        title: "Kokoro Text-to-Speech",
+        benefit: "Listen to your agent's thoughts hands-free",
+        desc: "Hear your agent's reasoning read aloud using high-fidelity Kokoro voice generation. Keep coding while omp explains its architectural decisions verbally.",
+        badge: "Audio",
+        command: "omp voice: active (Kokoro engine)"
+      }
+    ]
+  }
+];
+---
+
+<Layout title="omp.sh | Everyday Benefits & Supercharged Setup">
+  
+  <!-- HERO SECTION -->
+  <section class="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 mb-6">
+          <span>Rethinking the developer-agent experience</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          The CLI Coding Assistant that <br/>
+          <span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+            Thinks Like a Developer
+          </span>
+        </h1>
+        
+        <p class="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+          Forget benchmaxxed jargon and raw LSP charts. Discover the everyday benefits of <strong class="text-slate-200">omp</strong> — the first terminal assistant built for flow state, budget transparency, and true multi-model collaboration.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
+          <a href="#features" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg shadow-blue-500/20 transition-all hover:-translate-y-0.5 duration-150">
+            Explore Everyday Benefits
+          </a>
+          <a href="#workflow" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 font-semibold border border-slate-800 transition-all hover:-translate-y-0.5 duration-150">
+            Our Second-Brain Setup
+          </a>
+        </div>
+      </div>
+
+      <!-- CSS TERMINAL MOCKUP -->
+      <div class="max-w-4xl mx-auto rounded-xl border border-slate-800 bg-[#0F111E] shadow-2xl shadow-indigo-950/20 overflow-hidden">
+        <div class="flex items-center justify-between px-4 py-3 bg-[#0B0D17] border-b border-slate-900">
+          <div class="flex space-x-2">
+            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+          </div>
+          <div class="text-xs text-slate-500 font-medium">omp --session index.astro</div>
+          <div class="w-12"></div>
+        </div>
+        <div class="p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto text-slate-300">
+          <div class="flex items-center space-x-2 text-slate-500">
+            <span>[15:42:10]</span>
+            <span class="text-indigo-400">⚡ omp initialized</span>
+            <span>-</span>
+            <span class="text-emerald-400 font-medium">o1-mini (Default)</span>
+          </div>
+          <div class="mt-3 text-slate-400">&gt; /switch claude-3-5-sonnet</div>
+          <div class="text-blue-400 mt-1">✔ Swapped active model. Ready.</div>
+          
+          <div class="mt-4 text-slate-400">&gt; /goal implement tailwind animation and verify build</div>
+          <div class="text-indigo-400 mt-1">🎯 Goal set: "implement tailwind animation and verify build"</div>
+          <div class="text-slate-500 mt-1">├── Step 1: Scanning src/components/Animation.astro...</div>
+          <div class="text-slate-500">├── Step 2: Modifying styles (edit tool applied)</div>
+          <div class="text-slate-500">├── Step 3: Running 'npm run build'...</div>
+          <div class="text-emerald-400 font-semibold mt-1">✔ Goal achieved successfully in 12.4s.</div>
+          
+          <div class="mt-6 pt-4 border-t border-slate-900/60 flex flex-wrap justify-between items-center text-[11px] text-slate-500">
+            <div class="flex space-x-4">
+              <span>Tokens: <strong class="text-slate-400">8.4k / 1.2k</strong></span>
+              <span>Cost: <strong class="text-slate-400">$0.025</strong></span>
+            </div>
+            <div class="flex space-x-2 text-indigo-400">
+              <span>Advisor: Active (Gemini)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section id="features" class="py-20 border-t border-slate-900 bg-[#080B15]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+          Everyday Developer Benefits
+        </h2>
+        <p class="text-slate-400">
+          Other tools focus on synthetic benchmarks. We focus on removing friction from your terminal-driven workspace.
+        </p>
+      </div>
+
+      <div class="space-y-16">
+        {pillars.map((pillar) => (
+          <div>
+            <div class="border-b border-slate-800/60 pb-4 mb-8">
+              <h3 class="text-xl font-bold text-slate-200">{pillar.title}</h3>
+              <p class="text-sm text-slate-400 mt-1">{pillar.description}</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pillar.features.map((feat) => (
+                <div class="group relative rounded-2xl border border-slate-800/80 bg-[#0C0F1E] hover:bg-[#111529] p-6 hover:border-slate-700/80 transition-all duration-300 shadow-md">
+                  <div class="absolute top-4 right-4 text-xs font-mono px-2 py-0.5 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
+                    {feat.badge}
+                  </div>
+                  
+                  <div class="flex items-center space-x-3 mb-4">
+                    <span class="text-xs font-mono font-bold text-blue-500 bg-blue-500/10 px-2 py-1 rounded">
+                      {feat.num}
+                    </span>
+                    <h4 class="text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                      {feat.title}
+                    </h4>
+                  </div>
+                  
+                  <p class="text-xs font-semibold text-emerald-400 mb-2 uppercase tracking-wider">
+                    {feat.benefit}
+                  </p>
+                  
+                  <p class="text-sm text-slate-400 mb-6 leading-relaxed">
+                    {feat.desc}
+                  </p>
+                  
+                  <div class="mt-auto pt-4 border-t border-slate-900 flex items-center justify-between text-xs font-mono text-slate-500">
+                    <span>Terminal preview:</span>
+                    <span class="text-slate-300 max-w-[200px] truncate">{feat.command}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPERCHARGED WORKFLOW & INTEGRATION -->
+  <section id="workflow" class="py-20 border-t border-slate-900 relative">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[150px] pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+        
+        <div class="lg:col-span-5 mb-12 lg:mb-0">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 mb-6">
+            <span>The Setup of Champions</span>
+          </div>
+          
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
+            Your "Second Brain" Setup
+          </h2>
+          
+          <p class="text-slate-400 mb-6 leading-relaxed">
+            While <strong class="text-slate-300">omp</strong> is powerful on its own, its true potential is unlocked when you wire it with two essential ecosystem tools:
+          </p>
+
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold font-mono text-sm flex-shrink-0 mt-1">
+                W
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Worktree Bash Helper</h4>
+                <p class="text-sm text-slate-400 mt-1">
+                  Isolate tasks into clean, ephemeral git worktrees. This allows your agent to work independently without cluttering your active working directory.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono text-sm flex-shrink-0 mt-1">
+                E
+              </div>
+              <div>
+                <h4 class="text-base font-bold text-white">Engrams CLI</h4>
+                <p class="text-sm text-slate-400 mt-1">
+                  A Rust-built, zero-overhead persistent project memory. It stores architectural decisions (ADRs), system patterns, and task progress in a local, Git-syncable SQLite database that AI agents query instantly using FTS5 search.
+                </p>
+              </div>
+            </div>
+
+          <p class="text-slate-400 mt-8 leading-relaxed italic border-l-2 border-blue-500 pl-4">
+            "When combined with my worktree bash function and the engrams knowledge management cli tool, it's about as close as you can get to having a second brain that learns and grows with you in a project over time."
+          </p>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="rounded-2xl border border-slate-800 bg-[#0B0D17] p-6 shadow-xl">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-800 pb-3">
+              <h3 class="text-sm font-bold text-slate-300 font-mono flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                Ecosystem Integration Workflow
+              </h3>
+              <span class="text-xs text-slate-500 font-mono">bash & markdown</span>
+            </div>
+            
+            <div class="space-y-4">
+              <!-- Worktree bash snippet -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-xs text-indigo-400 font-semibold">1. Git Worktree Helper</span>
+                  <span class="text-[10px] text-slate-500">.bashrc / .zshrc</span>
+                </div>
+                <pre class="p-3 bg-[#070912] rounded-lg border border-slate-900 text-xs font-mono text-slate-300 overflow-x-auto">
+# Create feature branch, mount worktree, & open omp
+wt-omp() &#123;
+  local name=$1
+  git worktree add ../wt-$name -b feat/$name
+  cd ../wt-$name
+  omp
+&#125;</pre>
+                <div class="mt-3 rounded-lg overflow-hidden border border-slate-800 bg-[#070912] p-1">
+                  <img src={`${import.meta.env.BASE_URL}worktree-helper.png`} alt="Git Worktree Helper in action" class="w-full h-auto rounded opacity-85 hover:opacity-100 transition-opacity duration-200" />
+                </div>
+              </div>
+              <!-- Engrams CLI snapshot -->
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-xs text-emerald-400 font-semibold">2. Engrams Memory CLI</span>
+                  <span class="text-[10px] text-slate-500">Rust & SQLite (FTS5)</span>
+                </div>
+                <pre class="p-3 bg-[#070912] rounded-lg border border-slate-900 text-xs font-mono text-slate-300 overflow-x-auto">
+# Log architectural decisions that persist across workspaces
+$ engrams decision log --summary "Use Postgres" --rationale "ACID guarantees"
+
+# Generate a token-budget optimized context brief for the omp agent
+$ engrams prime &gt; .omp/context-brief.md</pre>
+              </div>
+
+              <!-- Workflow diagram -->
+              <div class="pt-2">
+                <span class="text-xs text-slate-500 font-semibold block mb-2">Workspace Brain Loop:</span>
+                <div class="grid grid-cols-3 gap-2 text-center text-xs font-mono">
+                  <div class="p-2 bg-indigo-500/10 border border-indigo-500/20 rounded">
+                    <div class="font-bold text-indigo-300">1. Git Worktree</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Clean Isolation</div>
+                  </div>
+                  <div class="p-2 bg-blue-500/10 border border-blue-500/20 rounded">
+                    <div class="font-bold text-blue-300">2. omp Agent</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Task Autopilot</div>
+                  </div>
+                  <div class="p-2 bg-emerald-500/10 border border-emerald-500/20 rounded">
+                    <div class="font-bold text-emerald-300">3. Engrams</div>
+                    <div class="text-[10px] text-slate-500 mt-1">Persistent Memory</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE SECTION -->
+  <section id="comparison" class="py-20 border-t border-slate-900 bg-[#080B15]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+          How omp Beats the Competition
+        </h2>
+        <p class="text-slate-400">
+          Why terminal-focused developers are switching from heavy IDE integrations to clean, lightweight CLI orchestrators.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto overflow-x-auto rounded-2xl border border-slate-800 bg-[#0C0F1E]">
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-slate-800 bg-[#0B0D17]">
+              <th class="p-4 font-bold text-white">Feature Advantage</th>
+              <th class="p-4 font-bold text-indigo-400">omp CLI</th>
+              <th class="p-4 font-bold text-slate-400">Traditional Copilots</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60">
+            <tr>
+              <td class="p-4 font-medium text-slate-200">Subscription Freedom</td>
+              <td class="p-4 text-emerald-400 font-medium">Yes — Login to all your subs</td>
+              <td class="p-4 text-slate-500">No — Pay for a separate seat</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-slate-200">Dynamic Reasoning Swaps</td>
+              <td class="p-4 text-emerald-400 font-medium">Yes — ctrl+p / shift+tab on the fly</td>
+              <td class="p-4 text-slate-500">No — Single model lock-in per workspace</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-slate-200">Double-Team Brains</td>
+              <td class="p-4 text-emerald-400 font-medium">Yes — Secondary Advisor modes</td>
+              <td class="p-4 text-slate-500">No — One agent only</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-slate-200">Cost Transparency</td>
+              <td class="p-4 text-emerald-400 font-medium">Yes — Real-time micro-cent tickers</td>
+              <td class="p-4 text-slate-500">No — hidden credit systems</td>
+            </tr>
+            <tr>
+              <td class="p-4 font-medium text-slate-200">Self-Correcting Loops</td>
+              <td class="p-4 text-emerald-400 font-medium">Yes — /goal command auto-testing</td>
+              <td class="p-4 text-slate-500">No — Manual copy-paste errors</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / INSTALLATION -->
+  <section id="get-started" class="py-20 border-t border-slate-900 bg-gradient-to-b from-[#0A0D1A] to-[#060810]">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">
+        Ready to Build Your Second Brain?
+      </h2>
+      <p class="text-slate-400 mb-8 max-w-xl mx-auto">
+        Install the lightweight CLI companion and connect your existing subscriptions to unlock a whole new coding velocity.
+      </p>
+      
+      <div class="bg-[#0B0D17] border border-slate-800 rounded-xl p-4 max-w-md mx-auto mb-10 flex items-center justify-between font-mono text-sm">
+        <span class="text-slate-300 select-all">curl -fsSL https://omp.sh/install | sh</span>
+        <button id="copy-btn" class="text-blue-500 hover:text-blue-400 px-3 py-1 bg-blue-500/10 rounded border border-blue-500/20 text-xs font-semibold font-sans transition-colors">
+          Copy
+        </button>
+      </div>
+
+      <div class="text-xs text-slate-500">
+        Requires Node 18+, Bun, or Python environment. Supports macOS, Linux, and Windows WSL.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const copyBtn = document.getElementById('copy-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText('curl -fsSL https://omp.sh/install | sh');
+        copyBtn.innerText = 'Copied!';
+        setTimeout(() => {
+          copyBtn.innerText = 'Copy';
+        }, 2000);
+      });
+    }
+  </script>
+
+</Layout>

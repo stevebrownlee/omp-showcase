@@ -1,0 +1,106 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Discover the real-world, everyday benefits of omp — the ultimate AI-powered companion for terminal-focused developers." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style is:global>
+      body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+      code, pre, .mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+    </style>
+  </head>
+  <body class="bg-[#0A0D1A] text-slate-100 min-h-screen selection:bg-blue-500/30 selection:text-blue-200 overflow-x-hidden">
+    <!-- Background grid & ambient glows -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f29370a_1px,transparent_1px),linear-gradient(to_bottom,#1f29370a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+    
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] left-[20%] w-[60%] h-[50%] rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none"></div>
+
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0A0D1A]/80 border-b border-slate-800/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href={import.meta.env.BASE_URL} class="flex items-center space-x-3 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
+            Ω
+          </div>
+          <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">omp</span>
+          <span class="text-xs px-2 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-medium">unfiltered</span>
+        </a>
+        
+        <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+          <a href="#features" class="hover:text-white transition-colors">Features</a>
+          <a href="#workflow" class="hover:text-white transition-colors">Supercharged Workflow</a>
+          <a href="#comparison" class="hover:text-white transition-colors">Why omp?</a>
+        </nav>
+        
+        <div class="flex items-center space-x-4">
+          <a href="https://omp.sh/" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+            Official Site
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <a href="#get-started" class="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none">
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 group-hover:opacity-100 opacity-90"></span>
+            <span class="relative block px-4 py-2 rounded-[11px] bg-[#0A0D1A] text-sm font-semibold text-white transition-all duration-300 group-hover:bg-transparent">
+              Get Started
+            </span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="relative z-10">
+      <slot />
+    </main>
+
+    <footer class="border-t border-slate-800/80 bg-[#070912] py-12 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+          <div>
+            <div class="flex items-center justify-center md:justify-start space-x-3 mb-3">
+              <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-sm">
+                Ω
+              </div>
+              <span class="text-lg font-bold tracking-tight text-white">omp.sh</span>
+            </div>
+            <p class="text-sm text-slate-400 max-w-sm">
+              The everyday developer's guide to the most friction-free, powerful CLI coding assistant in existence.
+            </p>
+          </div>
+          <div class="flex flex-wrap justify-center gap-8 text-sm text-slate-400">
+            <a href="#features" class="hover:text-white transition-colors">Features</a>
+            <a href="#workflow" class="hover:text-white transition-colors">Workflows</a>
+            <a href="https://omp.sh/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Official Docs</a>
+          </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-slate-800/40 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+          <p>© {new Date().getFullYear()} omp-showcase. This is an unofficial feature showcase designed to highlight everyday developer benefits.</p>
+          <p>Powered by Astro & Tailwind CSS</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
