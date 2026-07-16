@@ -85,6 +85,7 @@ function formatTerminalLine(text: string, type: string) {
 
       <!-- Terminal Mockup / Prompt Bar -->
       {feat.id === 'token-counter' ? (
+        <!-- TOKEN COUNTER: prompt bar only -->
         <div class="rounded-xl border border-slate-800 bg-[#0F111E] shadow-2xl overflow-hidden">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#0B0D17] border-b border-slate-900">
             <div class="flex space-x-2">
@@ -95,17 +96,13 @@ function formatTerminalLine(text: string, type: string) {
             <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
             <div class="w-8"></div>
           </div>
-          <!-- Fake session content -->
           <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16]">
             <div class="text-slate-500 mb-1">Implementing src/auth/middleware.ts...</div>
             <div class="text-emerald-400/80 mb-1">✔ File written successfully.</div>
             <div class="text-slate-500 mb-4">Awaiting next prompt...</div>
             <div class="text-slate-700 text-[10px] mb-2 uppercase tracking-widest">Prompt bar (always visible):</div>
-            <!-- OMP Prompt Bar Replica -->
             <div class="flex items-stretch rounded-lg overflow-hidden text-[11px] font-mono border border-slate-800 w-full">
-              <div class="flex items-center px-3 py-2 bg-[#1a1040] text-purple-400 font-bold text-base border-r border-slate-800 flex-shrink-0">
-                π
-              </div>
+              <div class="flex items-center px-3 py-2 bg-[#1a1040] text-purple-400 font-bold text-base border-r border-slate-800 flex-shrink-0">π</div>
               <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-purple-300 border-r border-slate-800 flex-shrink-0">
                 <span class="text-[10px] text-slate-500">⬡</span>
                 <span class="font-semibold">Sonnet 4.6++</span>
@@ -120,22 +117,80 @@ function formatTerminalLine(text: string, type: string) {
               </div>
               <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800 flex-shrink-0">›</div>
               <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-yellow-400 border-r border-slate-800 flex-shrink-0">
-                <span>⎇</span>
-                <span class="font-semibold">main</span>
+                <span>⎇</span><span class="font-semibold">main</span>
               </div>
               <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800 flex-shrink-0">›</div>
-              <div class="flex items-center gap-1.5 px-3 py-2 bg-[#161a2e] text-emerald-400 font-bold flex-shrink-0 border-l border-emerald-900/40">
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-[#161a2e] text-emerald-400 font-bold flex-shrink-0">
                 <span class="text-[10px]">▣</span>
                 <span class="text-emerald-300">26.2%</span><span class="text-slate-500 font-normal">/1M</span>
                 <span class="text-slate-600 text-[10px]">✦</span>
               </div>
             </div>
-            <p class="text-[10px] text-slate-600 mt-3 font-sans">
-              ↑ Token counter always embedded in the prompt. No commands needed.
-            </p>
+            <p class="text-[10px] text-slate-600 mt-3 font-sans">↑ Token counter always embedded in the prompt. No commands needed.</p>
+          </div>
+        </div>
+      ) : feat.id === 'cost-tracking' ? (
+        <!-- COST TRACKING: stats row + prompt bar with $cost segment -->
+        <div class="rounded-xl border border-slate-800 bg-[#0F111E] shadow-2xl overflow-hidden">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#0B0D17] border-b border-slate-900">
+            <div class="flex space-x-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+            </div>
+            <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
+            <div class="w-8"></div>
+          </div>
+          <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16]">
+            <!-- Session content -->
+            <div class="text-slate-300 mb-1">Refactoring src/payments/processor.ts...</div>
+            <div class="text-emerald-400/80 mb-3">✔ Done. The layout is now a single vertical flow...</div>
+            <!-- Stats row — appears after every response -->
+            <div class="text-slate-700 text-[10px] mb-1 uppercase tracking-widest">Stats row (after each response):</div>
+            <div class="flex items-center gap-5 px-3 py-2 mb-5 bg-[#070912] rounded border border-slate-900 text-slate-400 text-[11px]">
+              <span title="tokens in"><span class="text-slate-600">→)</span> 916</span>
+              <span title="tokens out"><span class="text-slate-600">↦</span> 63</span>
+              <span title="context size"><span class="text-slate-600">≡</span> 259K</span>
+              <span title="response time"><span class="text-slate-600">⏱</span> 2.2s</span>
+              <span title="tokens per second"><span class="text-slate-600">⊘</span> 17.4/s</span>
+            </div>
+            <!-- Prompt bar with cost -->
+            <div class="text-slate-700 text-[10px] mb-2 uppercase tracking-widest">Prompt bar (always visible):</div>
+            <div class="flex items-stretch rounded-lg overflow-hidden text-[11px] font-mono border border-slate-800 w-full">
+              <div class="flex items-center px-3 py-2 bg-[#1a1040] text-purple-400 font-bold text-base border-r border-slate-800 flex-shrink-0">π</div>
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-purple-300 border-r border-slate-800 flex-shrink-0">
+                <span class="text-[10px] text-slate-500">⬡</span>
+                <span class="font-semibold">Sonnet 4.6++</span>
+                <span class="text-slate-600">·</span>
+                <span class="text-[10px] text-slate-500">◎</span>
+                <span>med</span>
+              </div>
+              <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800 flex-shrink-0">›</div>
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-sky-400 border-r border-slate-800 min-w-0">
+                <span class="text-[10px] flex-shrink-0">📂</span>
+                <span class="truncate">…/omp</span>
+              </div>
+              <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800 flex-shrink-0">›</div>
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-yellow-400 border-r border-slate-800 flex-shrink-0">
+                <span>⎇</span><span class="font-semibold">main</span>
+              </div>
+              <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800 flex-shrink-0">›</div>
+              <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-emerald-400 border-r border-slate-800 flex-shrink-0">
+                <span class="text-[10px]">▣</span>
+                <span class="text-emerald-300">25.9%</span><span class="text-slate-500 font-normal">/1M</span>
+                <span class="text-slate-600 text-[10px]">✦</span>
+              </div>
+              <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800 flex-shrink-0">›</div>
+              <!-- Cost segment — the star of this feature -->
+              <div class="flex items-center gap-1 px-3 py-2 bg-[#0e1a10] text-yellow-400 font-bold flex-shrink-0">
+                <span>$2.58</span>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-600 mt-3 font-sans">↑ Running session cost. Updates after every response. Anthropic models only.</p>
           </div>
         </div>
       ) : (
+        <!-- DEFAULT: generic terminal mockup -->
         <div class="rounded-xl border border-slate-800 bg-[#0F111E] shadow-2xl overflow-hidden">
           <div class="flex items-center justify-between px-4 py-2.5 bg-[#0B0D17] border-b border-slate-900">
             <div class="flex space-x-2">

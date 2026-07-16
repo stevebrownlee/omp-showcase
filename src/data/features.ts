@@ -212,15 +212,17 @@ export const features: Feature[] = [
     id: "cost-tracking",
     num: "10",
     title: "Anthropic Cost Tracking",
-    benefit: "See the exact price of every single prompt and code edit in real-time.",
+    benefit: "See the exact running cost of your session — always visible in the prompt bar.",
     category: "Subscription & Budget",
-    summary: "Get instant billing transparency with a micro-cent pricing ticker showing actual API costs when routing queries to Anthropic models.",
-    explanation: "API bills can be unpredictable. When using Claude models, OMP calculates input, output, and cached tokens according to official Anthropic API rates, showing you the exact financial cost of each query directly in the terminal status bar.",
-    scenario: "You ask OMP to execute a large refactor. When it completes, the cost ticker displays `Cost: $0.0384`. You have complete, granular control over your billing profile.",
+    summary: "When using Anthropic models, omp embeds a live cost counter directly into the prompt bar alongside token usage. Every response updates it in real-time.",
+    explanation: "API bills can be unpredictable. OMP eliminates the surprise by embedding a live cost counter directly into the prompt bar when you are using Anthropic models. After each response you also get a brief stats row showing input tokens, output tokens, context size, response time, and tokens-per-second throughput — everything you need to understand exactly what you are spending and why.",
+    scenario: "You ask OMP to refactor a large module. After the response lands, the stats row shows 916 tokens in, 63 out, 259K context, 2.2s, at 17.4 tokens/s. Glancing down at the prompt bar you see $2.58 — your running session total, updated instantly.",
     terminalLines: [
-      { type: 'info', text: '💰 Model: claude-3-5-sonnet' },
-      { type: 'ticker', text: 'Input: 8,421 cached ($0.003) | 1,200 fresh ($0.0036) | Output: 450 ($0.0067) | Total: $0.0133' }
-    ]
+      { type: 'info', text: 'Response stats row (appears after every reply):' },
+      { type: 'output', text: '→) 916   ↦ 63   ≡ 259K   ⏱ 2.2s   ⊘ 17.4/s' },
+      { type: 'info', text: 'Prompt bar (always visible):' },
+      { type: 'output', text: 'π  Sonnet 4.6++  ·  med    ~/Code/SSL/Workshops/omp    main    25.9%/1M    $2.58' },
+    ],
   },
   {
     id: "ctrl-p",
