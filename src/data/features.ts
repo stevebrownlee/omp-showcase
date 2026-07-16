@@ -198,15 +198,15 @@ export const features: Feature[] = [
     id: "token-counter",
     num: "09",
     title: "Real-Time Token Usage",
-    benefit: "Track exact context window consumption to prevent model bloat.",
+    benefit: "See exactly how much context you've consumed — always, at a glance, right in the prompt.",
     category: "Subscription & Budget",
-    summary: "An active status bar counter shows input, output, and system prompt tokens consumed during every turn of your workspace session.",
-    explanation: "AI model performance degrades as context windows fill up with redundant file reads. OMP displays a real-time token counter in your terminal bar. You always know exactly how much context you've built up, letting you know when it's time to run `/clear` or exclude files.",
-    scenario: "You notice the token counter has reached 80k tokens because you read a large directory. You run a `/forget` command on the unrelated directories to drop the active context down to 5k, speeding up response times.",
+    summary: "Token usage is permanently embedded in the omp prompt bar as a live percentage/max display. It updates after every single response.",
+    explanation: "AI model performance degrades silently as the context window fills with redundant file reads and stale conversation turns. OMP solves this by embedding a live token counter directly into the prompt bar — always visible, zero commands needed. You can see at a glance what percentage of the context window is consumed and the raw token ceiling of your active model. When it gets high, you know it's time to run `/clear` or drop files from context.",
+    scenario: "You've been working in a session for an hour, reading files and running commands. Glancing at the prompt bar you see 26.2%/1M — you're at 26.2% of a 1 million token context window. You can keep going confidently without worrying about hitting the limit or experiencing degraded responses.",
     terminalLines: [
-      { type: 'info', text: '📈 Active Context Size:' },
-      { type: 'ticker', text: 'Tokens: 14,289 in | 1,024 out | 128k Max (11.1% capacity)' }
-    ]
+      { type: 'info', text: 'The omp prompt bar — always visible at the bottom of your session:' },
+      { type: 'output', text: 'π  Sonnet 4.6++  ·  med    ~/Code/SSL/Workshops/omp    main    26.2%/1M' },
+    ],
   },
   {
     id: "cost-tracking",
