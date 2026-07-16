@@ -70,11 +70,10 @@ export const features: Feature[] = [
     explanation: "Not all tasks require the highest-tier reasoning. Running o1 to fix a simple syntax typo is wasteful; conversely, using Claude Haiku to design a database migration will lead to errors. OMP introduces task-based model modes, allowing you to map models from different providers to different operational speeds.",
     scenario: "You ask OMP to document a file. The quick model (Haiku) handles it instantly. When you ask it to plan a multi-file migration, it automatically spins up the planning model (o1) to draw the blueprints.",
     terminalLines: [
-      { type: 'info', text: '⚡ Default modes loaded from config:' },
-      { type: 'output', text: '  - quick:    claude-3-5-haiku   (Fast, low cost)' },
-      { type: 'output', text: '  - default:  claude-3-5-sonnet  (Balanced coding)' },
-      { type: 'output', text: '  - planning: o1                 (High reasoning)' },
-      { type: 'output', text: '  - slow:     o3-mini            (Deep logical search)' }
+      { type: 'info', text: 'Model speed-dial menu (Ctrl+P):' },
+      { type: 'output', text: 'smol  default  slow' },
+      { type: 'info', text: 'Prompt bar:' },
+      { type: 'output', text: 'π  Haiku 4.5++  ·  med    ~/Code/SSL/Workshops/omp    main    136.3%/200K    $3.34' }
     ],
     codeExample: {
       title: "Custom model mappings in your project configuration",
