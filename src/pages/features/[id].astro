@@ -15,6 +15,29 @@ const { feat } = Astro.props;
 const currentIndex = features.findIndex(f => f.id === feat.id);
 const prevFeature = currentIndex > 0 ? features[currentIndex - 1] : null;
 const nextFeature = currentIndex < features.length - 1 ? features[currentIndex + 1] : null;
+
+// Helper function to format terminal line text
+function formatTerminalLine(text: string, type: string) {
+  if (type === 'input') return text;
+  
+  const isSelected = text.trim().startsWith('❯');
+  
+  let html = text
+    .replace(/● logged in/g, '<span class="text-emerald-500 font-semibold">● logged in</span>')
+    .replace(/\(login\)/g, '<span class="text-slate-500">(login)</span>')
+    .replace(/\(env\)/g, '<span class="text-slate-500">(env)</span>')
+    .replace(/✔ (.*)/g, '<span class="text-emerald-400">✔ $1</span>');
+    
+  if (isSelected) {
+    return `<span class="text-purple-400 font-bold">${html}</span>`;
+  }
+  
+  if (type === 'info') {
+    return `<span class="text-slate-500">${html}</span>`;
+  }
+  
+  return `<span class="text-slate-300">${html}</span>`;
+}
 ---
 
 <Layout title={`${feat.title} | omp everyday benefits`} activeFeatureId={feat.id}>
@@ -110,12 +133,6 @@ const nextFeature = currentIndex < features.length - 1 ? features[currentIndex +
                     <span class="text-indigo-400 font-bold">&gt;</span> {line.text}
                   </div>
                 );
-              } else if (line.type === 'output') {
-                return (
-                  <div class="text-emerald-400/90 mb-1">
-                    {line.text}
-                  </div>
-                );
               } else if (line.type === 'ticker') {
                 return (
                   <div class="text-slate-400 bg-slate-950/60 p-2 rounded border border-slate-900/80 text-[11px] mt-2 mb-2 font-semibold">
@@ -124,9 +141,7 @@ const nextFeature = currentIndex < features.length - 1 ? features[currentIndex +
                 );
               } else {
                 return (
-                  <div class="text-slate-500 mb-2 italic">
-                    {line.text}
-                  </div>
+                  <div class="mb-1" set:html={formatTerminalLine(line.text, line.type)} />
                 );
               }
             })}
