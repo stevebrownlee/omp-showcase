@@ -1,10 +1,14 @@
 ---
+import { features, categories } from '../data/features';
+import { ClientRouter } from 'astro:transitions';
+
 interface Props {
   title: string;
   description?: string;
+  activeFeatureId?: string;
 }
 
-const { title, description = "Discover the real-world, everyday benefits of omp — the ultimate AI-powered companion for terminal-focused developers." } = Astro.props;
+const { title, description = "Discover the real-world, everyday benefits of omp — the ultimate AI-powered companion for terminal-focused developers.", activeFeatureId } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,6 +20,7 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <ClientRouter />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +33,21 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
       }
       code, pre, .mono {
         font-family: 'JetBrains Mono', monospace;
+      }
+      
+      /* Subtle custom scrollbar for sidebar */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #1e293b;
+        border-radius: 2px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #334155;
       }
     </style>
   </head>
@@ -50,9 +70,9 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
         </a>
         
         <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
-          <a href="#features" class="hover:text-white transition-colors">Features</a>
-          <a href="#workflow" class="hover:text-white transition-colors">Supercharged Workflow</a>
-          <a href="#comparison" class="hover:text-white transition-colors">Why omp?</a>
+          <a href={`${import.meta.env.BASE_URL}features/universal-login`} class="hover:text-white transition-colors">Features</a>
+          <a href={`${import.meta.env.BASE_URL}#workflow`} class="hover:text-white transition-colors">Second Brain Setup</a>
+          <a href={`${import.meta.env.BASE_URL}#comparison`} class="hover:text-white transition-colors">Why omp?</a>
         </nav>
         
         <div class="flex items-center space-x-4">
@@ -62,7 +82,7 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </a>
-          <a href="#get-started" class="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none">
+          <a href={`${import.meta.env.BASE_URL}#get-started`} class="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none">
             <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-300 group-hover:opacity-100 opacity-90"></span>
             <span class="relative block px-4 py-2 rounded-[11px] bg-[#0A0D1A] text-sm font-semibold text-white transition-all duration-300 group-hover:bg-transparent">
               Get Started
@@ -72,11 +92,72 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
       </div>
     </header>
 
-    <main class="relative z-10">
-      <slot />
-    </main>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+        
+        <!-- Left Sidebar: Vertical Navigation (State Persistent across transitions) -->
+        <aside class="lg:col-span-3 mb-8 lg:mb-0" transition:persist>
+          <nav class="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 pb-6 custom-scrollbar">
+            <!-- Back to Dashboard / Setup -->
+            <div>
+              <a
+                href={import.meta.env.BASE_URL}
+                class={`flex items-center space-x-2 px-3 py-2 text-sm font-semibold rounded-lg transition-all border ${
+                  !activeFeatureId
+                    ? 'bg-blue-600/10 text-blue-400 border-blue-500/30'
+                    : 'text-slate-400 hover:text-white bg-slate-900/40 hover:bg-slate-800/40 border-slate-800/60'
+                }`}
+              >
+                <span>🏠 Setup & Overview</span>
+              </a>
+            </div>
 
-    <footer class="border-t border-slate-800/80 bg-[#070912] py-12 relative z-10">
+            {categories.map((cat) => {
+              const catFeatures = features.filter(f => f.category === cat);
+              return (
+                <div class="space-y-2">
+                  <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider px-3">
+                    {cat}
+                  </h3>
+                  <ul class="space-y-1">
+                    {catFeatures.map((feat) => {
+                      const isActive = activeFeatureId === feat.id;
+                      return (
+                        <li>
+                          <a
+                            href={`${import.meta.env.BASE_URL}features/${feat.id}`}
+                            class={`group flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg transition-all ${
+                              isActive
+                                ? 'bg-blue-600/10 text-blue-400 border-l-2 border-blue-500 font-semibold'
+                                : 'text-slate-400 hover:text-white hover:bg-slate-850/20 border-l-2 border-transparent'
+                            }`}
+                          >
+                            <span class="truncate">{feat.title}</span>
+                            <span class={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+                              isActive ? 'bg-blue-500/20 text-blue-400' : 'bg-slate-900 text-slate-500 group-hover:text-slate-400'
+                            }`}>
+                              {feat.num}
+                            </span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
+          </nav>
+        </aside>
+
+        <!-- Right Content Slot -->
+        <main class="lg:col-span-9 relative z-10 min-w-0">
+          <slot />
+        </main>
+        
+      </div>
+    </div>
+
+    <footer class="border-t border-slate-800/80 bg-[#070912] py-12 mt-12 relative z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
         <div class="flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
@@ -91,8 +172,8 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
             </p>
           </div>
           <div class="flex flex-wrap justify-center gap-8 text-sm text-slate-400">
-            <a href="#features" class="hover:text-white transition-colors">Features</a>
-            <a href="#workflow" class="hover:text-white transition-colors">Workflows</a>
+            <a href={`${import.meta.env.BASE_URL}features/universal-login`} class="hover:text-white transition-colors">Features</a>
+            <a href={`${import.meta.env.BASE_URL}#workflow`} class="hover:text-white transition-colors">Workflows</a>
             <a href="https://omp.sh/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Official Docs</a>
           </div>
         </div>
