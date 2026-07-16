@@ -148,9 +148,9 @@ function formatTerminalLine(text: string, type: string) {
                 <!-- Chevron -->
                 <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800">›</div>
                 <!-- Directory segment -->
-                <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-sky-400 border-r border-slate-800">
-                  <span class="text-[10px]">📂</span>
-                  <span>~/Code/SSL/Workshops/omp</span>
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-sky-400 border-r border-slate-800 min-w-0">
+                  <span class="text-[10px] flex-shrink-0">📂</span>
+                  <span class="truncate">…/omp</span>
                 </div>
                 <!-- Chevron -->
                 <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800">›</div>
@@ -162,9 +162,9 @@ function formatTerminalLine(text: string, type: string) {
                 <!-- Chevron -->
                 <div class="flex items-center px-1 py-2 bg-[#0e0e1a] text-slate-700 border-r border-slate-800">›</div>
                 <!-- Token usage segment — the star of this feature -->
-                <div class="flex items-center gap-1.5 px-3 py-2 bg-[#0e0e1a] text-emerald-400 font-bold">
+                <div class="flex items-center gap-1.5 px-3 py-2 bg-[#161a2e] text-emerald-400 font-bold flex-shrink-0 border-l border-emerald-900/40">
                   <span class="text-[10px]">▣</span>
-                  <span>26.2%/1M</span>
+                  <span class="text-emerald-300">26.2%</span><span class="text-slate-500 font-normal">/1M</span>
                   <span class="text-slate-600 text-[10px]">✦</span>
                 </div>
               </div>
