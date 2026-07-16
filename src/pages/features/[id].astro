@@ -19,41 +19,38 @@ const nextFeature = currentIndex < features.length - 1 ? features[currentIndex +
 // Helper function to format terminal line text
 function formatTerminalLine(text: string, type: string) {
   if (type === 'input') return text;
-  
+
   const isSelected = text.trim().startsWith('❯');
-  
+
   let html = text
     .replace(/● logged in/g, '<span class="text-emerald-500 font-semibold">● logged in</span>')
     .replace(/\(login\)/g, '<span class="text-slate-500">(login)</span>')
     .replace(/\(env\)/g, '<span class="text-slate-500">(env)</span>')
     .replace(/✔ (.*)/g, '<span class="text-emerald-400">✔ $1</span>');
-    
+
   if (isSelected) {
     return `<span class="text-purple-400 font-bold">${html}</span>`;
   }
-  
+
   if (type === 'info') {
     return `<span class="text-slate-500">${html}</span>`;
   }
-  
+
   return `<span class="text-slate-300">${html}</span>`;
 }
 ---
 
 <Layout title={`${feat.title} | omp everyday benefits`} activeFeatureId={feat.id}>
   <div class="space-y-8 animate-fade-in" transition:animate="slide">
-    
+
     <!-- HEADER CARD -->
     <div class="relative rounded-2xl border border-slate-800 bg-[#0C0F1E] p-8 shadow-xl overflow-hidden">
       <!-- Glow decoration -->
       <div class="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none"></div>
-      
+
       <div class="flex items-center space-x-3 mb-4">
         <span class="text-xs font-mono font-bold text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded border border-blue-500/20">
           {feat.category}
-        </span>
-        <span class="text-xs font-mono text-slate-500">
-          Feature #{feat.num}
         </span>
       </div>
 
@@ -96,7 +93,7 @@ function formatTerminalLine(text: string, type: string) {
             <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
             <div class="w-8"></div>
           </div>
-          <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16]">
+          <div class="p-5 font-mono text-sm leading-relaxed bg-[#0A0C16]">
             <div class="text-slate-500 mb-1">Implementing src/auth/middleware.ts...</div>
             <div class="text-emerald-400/80 mb-1">✔ File written successfully.</div>
             <div class="text-slate-500 mb-4">Awaiting next prompt...</div>
@@ -141,7 +138,7 @@ function formatTerminalLine(text: string, type: string) {
             <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
             <div class="w-8"></div>
           </div>
-          <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16]">
+          <div class="p-5 font-mono text-sm leading-relaxed bg-[#0A0C16]">
             <!-- Mini Menu -->
             <div class="text-slate-700 text-[10px] mb-2 uppercase tracking-widest">Model speed-dial menu (Ctrl+P):</div>
             <div class="flex items-center gap-2 mb-4 font-mono text-xs">
@@ -154,7 +151,7 @@ function formatTerminalLine(text: string, type: string) {
               <span class="text-slate-500">&gt;</span>
               <span class="text-slate-400">slow</span>
             </div>
-            
+
             <!-- Prompt bar -->
             <div class="text-slate-700 text-[10px] mb-2 uppercase tracking-widest">Prompt bar:</div>
             <div class="flex items-stretch rounded-lg overflow-hidden text-[11px] font-mono border border-slate-800 w-full">
@@ -204,12 +201,12 @@ function formatTerminalLine(text: string, type: string) {
             <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
             <div class="w-8"></div>
           </div>
-          <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16] text-slate-350">
+          <div class="p-5 font-mono text-sm leading-relaxed bg-[#0A0C16] text-slate-350">
             <!-- Advisor Note header -->
             <div class="text-amber-500 font-bold mb-2 flex items-center gap-1.5">
               <span>ℹ</span> <span>Advisor 1 note</span>
             </div>
-            
+
             <!-- Advisor Box -->
             <div class="pl-3 border-l-2 border-amber-600/40 bg-amber-600/5 py-2 px-3 rounded-r mb-4 text-slate-300">
               <span class="text-amber-400">〈concern〉</span> The <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">cost-tracking</code> branch is now sharing the <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">token-counter</code> template, which shows the <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">26.2%/1M</code> prompt bar but NOT the stats row (<code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">→) 916 ↦ 63 ≡ 259K ⏱ 2.2s ⊘ 17.4/s</code>) or the <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">$2.58</code> cost segment. Add a separate <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">feat.id === 'cost-tracking'</code> branch (or a nested conditional inside the shared block) that renders those two cost-specific lines before/after the prompt bar replica — with <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">$2.58</code> appended as its own segment in the bar.
@@ -274,7 +271,7 @@ function formatTerminalLine(text: string, type: string) {
             <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
             <div class="w-8"></div>
           </div>
-          <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16]">
+          <div class="p-5 font-mono text-sm leading-relaxed bg-[#0A0C16]">
             <!-- Session content -->
             <div class="text-slate-300 mb-1">Refactoring src/payments/processor.ts...</div>
             <div class="text-emerald-400/80 mb-3">✔ Done. The layout is now a single vertical flow...</div>
@@ -334,7 +331,7 @@ function formatTerminalLine(text: string, type: string) {
             <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
             <div class="w-8"></div>
           </div>
-          <div class="p-5 font-mono text-xs leading-relaxed overflow-x-auto bg-[#0A0C16]">
+          <div class="p-5 font-mono text-sm leading-relaxed overflow-x-auto bg-[#0A0C16]">
             {feat.terminalLines.map((line) => {
               if (line.type === 'input') {
                 return (
@@ -365,7 +362,7 @@ function formatTerminalLine(text: string, type: string) {
             <span class="text-xs text-slate-400 font-mono font-semibold">{feat.codeExample.title}</span>
             <span class="text-[10px] text-slate-500 font-mono uppercase">{feat.codeExample.language}</span>
           </div>
-          <pre class="p-4 text-xs font-mono text-slate-300 overflow-x-auto bg-[#070912]"><code>{feat.codeExample.code}</code></pre>
+          <pre class="p-4 text-sm font-mono text-slate-300 overflow-x-auto bg-[#070912]"><code>{feat.codeExample.code}</code></pre>
         </div>
       )}
 

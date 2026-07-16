@@ -112,7 +112,7 @@ export const features: Feature[] = [
     category: "Autopilot & Collaboration",
     summary: "Run a primary executor model side-by-side with an advisor model that acts as a real-time code reviewer, suggesting improvements on the fly.",
     explanation: "Two brains are better than one. OMP lets you run an Advisor model alongside your default model. The primary agent executes tasks (reads files, writes code, runs terminal commands), while the secondary Advisor model checks the diffs in the background, intercepting errors before they land.",
-    scenario: "You tell your primary model (Claude Sonnet) to write a database connection pool. While it writes, a reasoning model (Gemini 1.5 Pro) runs as the Advisor and interrupts: 'Warning: Connection pool leak detected. Ensure all connections are returned to the pool in a finally block.'",
+    scenario: "You tell your primary model (Gemini 3.5 Flash) to write a database connection pool. While it writes, a reasoning model (Claude Sonnet 4.5) runs as the Advisor and interrupts: 'Warning: Connection pool leak detected. Ensure all connections are returned to the pool in a finally block.'",
     terminalLines: [
       { type: 'info', text: 'ℹ Advisor 1 note' },
       { type: 'output', text: '〈concern〉 The \'cost-tracking\' branch is now sharing the \'token-counter\' template...' },

@@ -4,29 +4,29 @@ import { features, categories } from '../data/features';
 ---
 
 <Layout title="omp.sh | Everyday Benefits & Supercharged Setup">
-  
+
   <!-- HERO SECTION -->
   <section class="relative pt-8 pb-12 overflow-hidden border-b border-slate-900 bg-[#080B15]/40 rounded-2xl px-6 sm:px-8 mb-12">
     <!-- Glow decoration -->
     <div class="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-blue-500/5 blur-[80px] pointer-events-none"></div>
-    
+
     <div class="relative z-10 max-w-4xl">
       <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 mb-6">
         <span>Rethinking the developer-agent experience</span>
         <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
       </div>
-      
+
       <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-6 leading-tight">
         The CLI Coding Assistant that <br/>
         <span class="bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
           Thinks Like a Developer
         </span>
       </h1>
-      
+
       <p class="text-base sm:text-lg text-slate-400 mb-8 max-w-2xl leading-relaxed">
         Forget synthetic benchmarks and raw LSP charts. Discover the everyday benefits of <strong class="text-slate-200">omp</strong> — the first terminal assistant built for flow state, budget transparency, and true multi-model collaboration.
       </p>
-      
+
       <div class="flex flex-wrap gap-4">
         <a href="#directory" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold shadow-lg shadow-blue-500/20 transition-all duration-150 text-sm">
           Browse 12 Killer Features
@@ -56,9 +56,6 @@ import { features, categories } from '../data/features';
           class="group block p-5 rounded-xl border border-slate-800/80 bg-[#0C0F1E] hover:bg-[#111529] hover:border-slate-700 transition-all duration-200 shadow-md"
         >
           <div class="flex justify-between items-start mb-3">
-            <span class="text-[10px] font-mono font-bold text-blue-500 bg-blue-500/10 px-2 py-0.5 rounded">
-              {feat.num}
-            </span>
             <span class="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
               {feat.category.split(' ')[0]}
             </span>
@@ -77,16 +74,16 @@ import { features, categories } from '../data/features';
   <!-- SUPERCHARGED WORKFLOW & INTEGRATION -->
   <section id="workflow" class="py-12 border-b border-slate-900 relative">
     <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-start">
-      
+
       <div class="lg:col-span-5 mb-8 lg:mb-0">
         <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-400 mb-6">
           <span>The Setup of Champions</span>
         </div>
-        
+
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-6">
           Your "Second Brain" Setup
         </h2>
-        
+
         <p class="text-slate-400 mb-6 text-sm leading-relaxed">
           While <strong class="text-slate-350">omp</strong> is powerful on its own, its true potential is unlocked when you wire it with two essential ecosystem tools:
         </p>
@@ -131,7 +128,7 @@ import { features, categories } from '../data/features';
             </h3>
             <span class="text-[10px] text-slate-500 font-mono">bash & markdown</span>
           </div>
-          
+
           <div class="space-y-4">
             <!-- Worktree bash snippet -->
             <div>
@@ -251,7 +248,7 @@ $ engrams prime &gt; .omp/context-brief.md</pre>
     <p class="text-slate-400 mb-6 text-sm max-w-xl mx-auto">
       Install the lightweight CLI companion and connect your existing subscriptions to unlock a whole new coding velocity.
     </p>
-    
+
     <div class="bg-[#0B0D17] border border-slate-800 rounded-xl p-4 max-w-md mx-auto mb-8 flex items-center justify-between font-mono text-sm">
       <span class="text-slate-300 select-all">curl -fsSL https://omp.sh/install | sh</span>
       <button id="copy-btn" class="text-blue-500 hover:text-blue-400 px-3 py-1 bg-blue-500/10 rounded border border-blue-500/20 text-xs font-semibold font-sans transition-colors">

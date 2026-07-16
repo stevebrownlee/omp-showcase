@@ -21,12 +21,12 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
     <title>{title}</title>
     <meta name="description" content={description} />
     <ClientRouter />
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style is:global>
       body {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -34,7 +34,7 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
       code, pre, .mono {
         font-family: 'JetBrains Mono', monospace;
       }
-      
+
       /* Subtle custom scrollbar for sidebar */
       .custom-scrollbar::-webkit-scrollbar {
         width: 4px;
@@ -54,7 +54,7 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
   <body class="bg-[#0A0D1A] text-slate-100 min-h-screen selection:bg-blue-500/30 selection:text-blue-200 overflow-x-hidden">
     <!-- Background grid & ambient glows -->
     <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f29370a_1px,transparent_1px),linear-gradient(to_bottom,#1f29370a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
-    
+
     <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[120px] pointer-events-none"></div>
     <div class="absolute top-[20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/5 blur-[120px] pointer-events-none"></div>
     <div class="absolute bottom-[-10%] left-[20%] w-[60%] h-[50%] rounded-full bg-emerald-500/5 blur-[120px] pointer-events-none"></div>
@@ -68,13 +68,13 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
           <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">omp</span>
           <span class="text-xs px-2 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-medium">unfiltered</span>
         </a>
-        
+
         <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
           <a href={`${import.meta.env.BASE_URL}features/universal-login`} class="hover:text-white transition-colors">Features</a>
           <a href={`${import.meta.env.BASE_URL}#workflow`} class="hover:text-white transition-colors">Second Brain Setup</a>
           <a href={`${import.meta.env.BASE_URL}#comparison`} class="hover:text-white transition-colors">Why omp?</a>
         </nav>
-        
+
         <div class="flex items-center space-x-4">
           <a href="https://omp.sh/" target="_blank" rel="noopener noreferrer" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1">
             Official Site
@@ -94,9 +94,9 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
 
     <div class="mt-8 mx-4">
       <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-        
+
         <!-- Left Sidebar: Vertical Navigation (State Persistent across transitions) -->
-        <aside class="lg:col-span-3 mb-8 lg:mb-0" transition:persist>
+        <aside class="lg:col-span-2 mb-8 lg:mb-0" transition:persist>
           <nav class="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2 pb-6 custom-scrollbar">
             <!-- Back to Dashboard / Setup -->
             <div>
@@ -133,11 +133,6 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
                             }`}
                           >
                             <span class="truncate">{feat.title}</span>
-                            <span class={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                              isActive ? 'bg-blue-500/20 text-blue-400' : 'bg-slate-900 text-slate-500 group-hover:text-slate-400'
-                            }`}>
-                              {feat.num}
-                            </span>
                           </a>
                         </li>
                       );
@@ -150,10 +145,10 @@ const { title, description = "Discover the real-world, everyday benefits of omp 
         </aside>
 
         <!-- Right Content Slot -->
-        <main class="lg:col-span-9 relative z-10 min-w-0">
+        <main class="lg:col-span-10  relative z-10 min-w-0">
           <slot />
         </main>
-        
+
       </div>
     </div>
 
