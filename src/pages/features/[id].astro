@@ -192,6 +192,76 @@ function formatTerminalLine(text: string, type: string) {
             </p>
           </div>
         </div>
+      ) : feat.id === 'advisor-mode' ? (
+        <!-- ADVISOR MODE: Claude Sonnet Advisor + Gemini Flash Executor Diff trace -->
+        <div class="rounded-xl border border-slate-800 bg-[#0F111E] shadow-2xl overflow-hidden">
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#0B0D17] border-b border-slate-900">
+            <div class="flex space-x-2">
+              <div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+            </div>
+            <div class="text-[11px] text-slate-500 font-mono font-medium">omp</div>
+            <div class="w-8"></div>
+          </div>
+          <div class="p-5 font-mono text-xs leading-relaxed bg-[#0A0C16] text-slate-350">
+            <!-- Advisor Note header -->
+            <div class="text-amber-500 font-bold mb-2 flex items-center gap-1.5">
+              <span>ℹ</span> <span>Advisor 1 note</span>
+            </div>
+            
+            <!-- Advisor Box -->
+            <div class="pl-3 border-l-2 border-amber-600/40 bg-amber-600/5 py-2 px-3 rounded-r mb-4 text-slate-300">
+              <span class="text-amber-400">〈concern〉</span> The <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">cost-tracking</code> branch is now sharing the <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">token-counter</code> template, which shows the <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">26.2%/1M</code> prompt bar but NOT the stats row (<code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">→) 916 ↦ 63 ≡ 259K ⏱ 2.2s ⊘ 17.4/s</code>) or the <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">$2.58</code> cost segment. Add a separate <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">feat.id === 'cost-tracking'</code> branch (or a nested conditional inside the shared block) that renders those two cost-specific lines before/after the prompt bar replica — with <code class="bg-slate-900/60 px-1 py-0.5 rounded text-indigo-300">$2.58</code> appended as its own segment in the bar.
+            </div>
+
+            <!-- Executor Thinking (Gemini 3.5 Flash) -->
+            <div class="text-slate-300 bg-slate-900/50 border border-slate-900/40 p-3 rounded mb-4 leading-relaxed">
+              The advisory is right. I need to create a proper separate branch for cost-tracking that shows:<br/>
+              1. The stats row: →) 916   ↦ 63   ≡ 259K   ⏱ 2.2s   ⊘ 17.4/s<br/>
+              2. The prompt bar with $2.58 appended at the end as its own segment<br/><br/>
+              Let me rewrite this properly - split the token-counter and cost-tracking into separate branches, or use a nested conditional to add the cost-specific elements.<br/><br/>
+              Let me read the current state of the file properly.<br/><br/>
+              That stub approach was wrong. Let me do this cleanly - split them into two proper branches.
+            </div>
+
+            <!-- Tool Invocation: Read -->
+            <div class="flex items-center gap-1.5 text-slate-300 mb-2">
+              <span class="text-white text-base">●</span>
+              <span>Read <span class="text-slate-500 font-mono">src/pages/features/[id].astro:86-175</span></span>
+            </div>
+
+            <!-- Stats Row output -->
+            <div class="flex items-center gap-4 text-slate-550 text-[11px] mb-4 font-mono">
+              <span>→) 718</span>
+              <span>↦ 246</span>
+              <span>≡ 264K</span>
+              <span>⏱ 2.2s</span>
+              <span>⊘ 45.9/s</span>
+            </div>
+
+            <!-- Tool Invocation: Edit -->
+            <div class="flex items-center gap-1.5 text-slate-300 mb-3">
+              <span class="text-slate-400 font-bold">✎</span>
+              <span>Edit: 📄 <span class="text-slate-500 font-mono">src/pages/features/[id].astro</span> <span class="text-emerald-400 font-mono">(+68/-14)</span></span>
+            </div>
+
+            <!-- Diff Block -->
+            <div class="rounded-lg border border-slate-800 bg-[#070912] overflow-hidden text-[11px] font-mono leading-relaxed mb-1">
+              <div class="flex bg-slate-950/40 px-3 py-1.5 border-b border-slate-900 text-slate-500 justify-between">
+                <span>diff --git a/src/pages/features/[id].astro b/src/pages/features/[id].astro</span>
+              </div>
+              <div class="p-3 text-[11px] space-y-0.5">
+                <div class="text-slate-600">85</div>
+                <div class="text-slate-450">86      &lt;!-- Terminal Mockup / Prompt Bar --&gt;</div>
+                <div class="bg-rose-950/30 text-rose-300 px-1.5 border-l-2 border-rose-600"><span class="select-none text-rose-500 mr-2">-87</span>{`{feat.id === 'token-counter' || feat.id === 'cost-tracking' ? (`}</div>
+                <div class="bg-emerald-950/30 text-emerald-300 px-1.5 border-l-2 border-emerald-600"><span class="select-none text-emerald-500 mr-2">+87</span>{`{feat.id === 'token-counter' ? (`}</div>
+                <div class="bg-emerald-950/30 text-emerald-300 px-1.5 border-l-2 border-emerald-600"><span class="select-none text-emerald-500 mr-2">+88</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- TOKEN COUNTER: prompt bar only --&gt;</div>
+                <div class="text-slate-600">...</div>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : feat.id === 'cost-tracking' ? (
         <!-- COST TRACKING: stats row + prompt bar with $cost segment -->
         <div class="rounded-xl border border-slate-800 bg-[#0F111E] shadow-2xl overflow-hidden">
