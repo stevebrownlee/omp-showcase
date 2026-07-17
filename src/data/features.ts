@@ -7,7 +7,11 @@ export interface Feature {
   summary: string;
   explanation: string;
   scenario: string;
-  terminalLines: { type: 'input' | 'output' | 'info' | 'ticker'; text: string }[];
+  terminalLines?: { type: 'input' | 'output' | 'info' | 'ticker'; text: string }[];
+  image?: {
+    src: string;
+    alt: string;
+  };
   codeExample?: {
     title: string;
     language: string;
@@ -97,12 +101,10 @@ export const features: Feature[] = [
     summary: "Change your active LLM on the fly with a simple slash command, preserving your loaded files, chat history, and shell context.",
     explanation: "If you're in the middle of a complex session and hit a roadblock where the current model is struggling, starting a new session is a flow-breaker. The `/switch` command hot-swaps the brain of your agent while keeping the active workspace state, shell session, and chat history intact.",
     scenario: "Your default model (Sonnet) is struggling with a highly mathematical algorithm refactoring. You type `/switch o1-mini` to swap to a reasoning model, solve the algorithm, and then `/switch back` to Sonnet.",
-    terminalLines: [
-      { type: 'input', text: '/switch openai/o1-mini' },
-      { type: 'info', text: '🔄 Hot-swapping agent brain...' },
-      { type: 'output', text: '✔ Swapped to o1-mini. Context preserved (14.2k tokens).' },
-      { type: 'input', text: 'Solve the algorithmic edge cases outlined in math_lib.py' }
-    ]
+    image: {
+      src: 'quick-switch.gif',
+      alt: 'Typing /switch into the terminal to hot-swap models'
+    }
   },
   {
     id: "advisor-mode",
